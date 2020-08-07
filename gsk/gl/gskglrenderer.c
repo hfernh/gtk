@@ -1546,7 +1546,7 @@ blur_node (GskGLRenderer   *self,
            float           *out_vertex_data[4]) /* min, max, min, max */
 {
   const float scale = ops_get_scale (builder);
-  const float blur_extra = blur_radius * 3.0 / 2.0;
+  const float blur_extra = blur_radius * 2.0 / 2.0; /* 2.0 = shader radius_multiplier */
   float texture_width, texture_height;
   gboolean is_offscreen;
   TextureRegion region;
@@ -1644,7 +1644,7 @@ render_inset_shadow_node (GskGLRenderer   *self,
 {
   const float scale = ops_get_scale (builder);
   const float blur_radius = gsk_inset_shadow_node_get_blur_radius (node);
-  const float blur_extra = blur_radius * 3;
+  const float blur_extra = blur_radius * 2.0; /* 2.0 = shader radius_multiplier */
   const float dx = gsk_inset_shadow_node_get_dx (node);
   const float dy = gsk_inset_shadow_node_get_dy (node);
   const GskRoundedRect *node_outline = gsk_inset_shadow_node_peek_outline (node);
@@ -1805,7 +1805,7 @@ render_outset_shadow_node (GskGLRenderer   *self,
   const GskRoundedRect *outline = gsk_outset_shadow_node_peek_outline (node);
   const GdkRGBA *color = gsk_outset_shadow_node_peek_color (node);
   const float blur_radius = gsk_outset_shadow_node_get_blur_radius (node);
-  const float blur_extra = blur_radius * 3; /* 3 Because we use that in the shader as well */
+  const float blur_extra = blur_radius * 2.0f; /* 2.0 = shader radius_multiplier */
   const int extra_blur_pixels = (int) ceilf(blur_extra / 2.0 * scale);
   const float spread = gsk_outset_shadow_node_get_spread (node);
   const float dx = gsk_outset_shadow_node_get_dx (node);
