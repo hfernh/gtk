@@ -2269,8 +2269,7 @@ switch {
   }
 }
 
-checkbutton,
-radiobutton {
+checkbutton {
   border-spacing: 4px;
   border-radius: $button_radius;
   transition: $focus_transition;

@@ -432,17 +432,17 @@ bool_modified (GtkToggleButton *tb, ObjectProperty *p)
 static void
 bool_changed (GObject *object, GParamSpec *pspec, gpointer data)
 {
-  GtkToggleButton *tb = GTK_TOGGLE_BUTTON (data);
+  GtkCheckButton *cb = GTK_CHECK_BUTTON (data);
   GValue val = G_VALUE_INIT;
 
   g_value_init (&val, G_TYPE_BOOLEAN);
   get_property_value (object, pspec, &val);
 
-  if (g_value_get_boolean (&val) != gtk_toggle_button_get_active (tb))
+  if (g_value_get_boolean (&val) != gtk_check_button_get_active (cb))
     {
-      block_controller (G_OBJECT (tb));
-      gtk_toggle_button_set_active (tb, g_value_get_boolean (&val));
-      unblock_controller (G_OBJECT (tb));
+      block_controller (G_OBJECT (cb));
+      gtk_check_button_set_active (cb, g_value_get_boolean (&val));
+      unblock_controller (G_OBJECT (cb));
     }
 
   g_value_unset (&val);
